@@ -12,7 +12,7 @@ class Display
         do
         {
             Console.WriteLine("\nPlease select : a. Write b. Display c. Save d. Load e. Quit");
-            Console.Write("What would you like to do? ");
+            
             
             userSelection= Console.ReadLine();
             Console.WriteLine();
