@@ -1,45 +1,49 @@
-public class Program
+class Program
 {
-    public static void Main(string[] args)
+    static void Main(string[] args)
     {
         bool running = true;
+        
         while (running)
         {
             Console.Clear();
             Console.WriteLine("Menu Options:");
-            Console.WriteLine("  1. Start Breathing Activity");
-            Console.WriteLine("  2. Start Reflection Activity");
-            Console.WriteLine("  3. Start Listing Activity");
+            Console.WriteLine("  1. Start breathing activity");
+            Console.WriteLine("  2. Start reflecting activity");
+            Console.WriteLine("  3. Start listing activity");
             Console.WriteLine("  4. Quit");
-            Console.Write("\nSelect a choice from the menu: ");
+            Console.Write("Select a choice from the menu: ");
+            
+            string input = Console.ReadLine();
 
-            string choice = Console.ReadLine();
-            MindfulnessActivity activity = null;
-
-            switch (choice)
+            switch (input)
             {
                 case "1":
-                    activity = new BreathingActivity();
+                    BreathingActivity breathing = new BreathingActivity();
+                    breathing.RunBreathingActivity();
                     break;
+
                 case "2":
-                    activity = new ReflectionActivity();
+                    ReflectionActivity reflection = new ReflectionActivity();
+                    reflection.RunReflectionActivity();
                     break;
+
                 case "3":
-                    activity = new ListingActivity();
+                    ListingActivity listing = new ListingActivity();
+                    listing.RunListingActivity();
                     break;
+
                 case "4":
                     running = false;
                     Console.WriteLine("\nThank you for using the Mindfulness Program!");
                     Thread.Sleep(2000);
-                    continue;
-                default:
-                    Console.WriteLine("\nInvalid choice. Press any key to try again.");
-                    Console.ReadKey();
-                    continue;
-            }
+                    break;
 
-            if (activity != null)
-                activity.Run();
+                default:
+                    Console.WriteLine("\nInvalid choice. Press any key to continue.");
+                    Console.ReadKey();
+                    break;
+            }
         }
     }
 }

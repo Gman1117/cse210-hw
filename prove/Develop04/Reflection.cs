@@ -1,13 +1,15 @@
-public class ReflectionActivity : MindfulnessActivity
+public class ReflectionActivity : BaseActivity
 {
-    private string[] prompts = {
+    private List<string> prompts = new List<string>
+    {
         "Think of a time when you stood up for someone else.",
         "Think of a time when you did something really difficult.",
         "Think of a time when you helped someone in need.",
         "Think of a time when you did something truly selfless."
     };
 
-    private string[] questions = {
+    private List<string> questions = new List<string>
+    {
         "Why was this experience meaningful to you?",
         "Have you ever done anything like this before?",
         "How did you get started?",
@@ -19,33 +21,37 @@ public class ReflectionActivity : MindfulnessActivity
         "How can you keep this experience in mind in the future?"
     };
 
-    public ReflectionActivity() : base("Reflection Activity") { }
-
-    protected override string GetDescription()
+    public ReflectionActivity(): base("Reflection Activity","This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.")
     {
-        return "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
     }
 
-    protected override void PerformActivity()
+    public void RunReflectionActivity()
     {
+        DisplayStartingMessage();
+
+        
+        Random random = new Random();
+        string prompt = prompts[random.Next(prompts.Count)];
         Console.WriteLine("\nConsider the following prompt:\n");
-        Console.WriteLine($"--- {prompts[new Random().Next(prompts.Length)]} ---\n");
-        Console.WriteLine("When you have something in mind, press enter to continue.");
+        Console.WriteLine($"--- {prompt} ---");
+        Console.WriteLine("\nWhen you have something in mind, press enter to continue.");
         Console.ReadLine();
 
-        Console.WriteLine("\nNow ponder on each of the following questions as they relate to this experience.");
+        Console.WriteLine("\nNow ponder each of the following questions as they related to this experience.");
         Console.Write("You may begin in: ");
         ShowCountDown(3);
-        Console.WriteLine();
+        Console.Clear();
 
         DateTime endTime = DateTime.Now.AddSeconds(duration);
         int questionIndex = 0;
 
-        while (DateTime.Now < endTime && questionIndex < questions.Length)
+        while (DateTime.Now < endTime && questionIndex < questions.Count)
         {
             Console.Write($"\n> {questions[questionIndex]} ");
             ShowSpinner(4);
             questionIndex++;
         }
+
+        DisplayEndingMessage();
     }
 }
