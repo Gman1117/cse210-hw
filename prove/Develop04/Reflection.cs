@@ -30,6 +30,7 @@ public class ReflectionActivity : BaseActivity
         DisplayStartingMessage();
 
         
+        
         Random random = new Random();
         string prompt = prompts[random.Next(prompts.Count)];
         Console.WriteLine("\nConsider the following prompt:\n");
